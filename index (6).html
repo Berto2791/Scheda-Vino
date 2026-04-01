@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scheda degustazione Assosommelier iPhone fix</title>
+<style>
+:root{
+  --bg:#f6f5f2; --card:#ffffff; --text:#2b2b2b; --muted:#6b7280; --line:#e5e7eb;
+  --orange:#d96b2b; --green:#8ea92e; --blue:#2f5aa3; --navy:#23285a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body{padding: max(14px, env(safe-area-inset-top)) 14px max(110px, env(safe-area-inset-bottom)) 14px}
+.app{max-width:1100px;margin:0 auto}
+.card{background:var(--card);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.06);padding:16px 16px 20px;margin:14px 0;border:1px solid rgba(0,0,0,.04)}
+.hero{background:linear-gradient(135deg,#111827,#374151);color:#fff;border-radius:20px;padding:18px}
+.hero h1{margin:0;font-size:1.15rem}
+.hero p{margin:.4rem 0 0;opacity:.9}
+.bar{height:10px;border-radius:999px;background:var(--orange);margin:10px 0 16px}
+.bar.green{background:var(--green)}
+.bar.blue{background:var(--blue)}
+.bar.navy{background:var(--navy)}
+.section-title{font-weight:900;text-transform:uppercase;color:var(--orange);font-size:1.08rem;margin:6px 0}
+.section-title.green{color:var(--green)}
+.section-title.blue{color:var(--blue)}
+.section-title.navy{color:var(--navy)}
+.group-title{font-weight:900;text-transform:uppercase;color:var(--orange);margin:16px 0 8px}
+.group-title.green{color:var(--green)}
+.group-title.blue{color:var(--blue)}
+.group-title.navy{color:var(--navy)}
+.row{display:grid;grid-template-columns:1fr 280px;gap:14px;align-items:start}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:980px){.grid-4,.grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:820px){.row{grid-template-columns:1fr}}
+@media (max-width:520px){.grid-2,.grid-4,.grid-3{grid-template-columns:1fr}}
+.label{font-weight:800;margin-bottom:6px}
+.note{color:var(--muted);font-size:.92rem}
+small.subtxt{color:var(--muted);font-weight:600}
+.block{padding:12px;border:1px solid var(--line);border-radius:14px}
+input[type="text"], input[type="date"], input[type="number"], textarea, select{
+  width:100%; border:1.5px solid var(--line); border-radius:14px; padding:14px 16px; font-size:16px;
+  background:#fff; color:var(--text); -webkit-appearance:none; appearance:none;
+}
+textarea{min-height:96px;resize:vertical}
+.choices{display:flex;flex-wrap:wrap;gap:10px}
+.choice-input{position:absolute;opacity:0;pointer-events:none}
+.choice-label{
+  display:inline-flex;align-items:center;justify-content:center;min-height:48px;
+  padding:12px 14px;border:1.5px solid var(--line);border-radius:999px;background:#fff;
+  color:var(--text);font-weight:700;cursor:pointer;user-select:none
+}
+.choice-input:checked + .choice-label.orange{background:var(--orange);border-color:var(--orange);color:#fff}
+.choice-input:checked + .choice-label.green{background:var(--green);border-color:var(--green);color:#fff}
+.choice-input:checked + .choice-label.blue{background:var(--blue);border-color:var(--blue);color:#fff}
+.scale-wrap{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 12px}
+.scale-input{position:absolute;opacity:0;pointer-events:none}
+.scale-label{
+  min-width:52px;padding:12px 0;text-align:center;border-radius:10px;font-weight:900;border:1px solid rgba(0,0,0,.05);
+  cursor:pointer;color:#213;background:#fff;display:inline-block
+}
+.scale-input:checked + .scale-label{outline:3px solid #111827}
+.footer{position:sticky;bottom:0;background:rgba(246,245,242,.96);backdrop-filter:blur(8px);padding-top:8px}
+.actions{display:flex;gap:10px;justify-content:flex-end}
+button{border:0;border-radius:14px;padding:13px 16px;font-weight:800;background:#111827;color:#fff;min-height:48px}
+button.secondary{background:#e5e7eb;color:#111827}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.legend span{padding:8px 10px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:700}
+@media (max-width:430px){
+  body{padding: max(10px, env(safe-area-inset-top)) 10px max(120px, env(safe-area-inset-bottom)) 10px}
+  .card{padding:14px 14px 18px;margin:10px 0}
+  .hero{padding:16px}
+  .hero h1{font-size:1.05rem}
+  .choices{gap:8px}
+  .choice-label{width:100%;justify-content:flex-start;border-radius:14px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hero">
+    <h1>Scheda degustazione Assosommelier</h1>
+    <p>Versione corretta per iPhone: selezione con veri radio/checkbox e tendine funzionanti.</p>
+  </div>
+
+  <div class="card">
+    <div class="grid-2">
+      <div><div class="label">Luogo</div><input id="luogo" type="text"></div>
+      <div><div class="label">Data</div><input id="data" type="date"></div>
+      <div><div class="label">Vino</div><input id="vino" type="text"></div>
+      <div><div class="label">Alcol % vol</div><input id="alcol" type="text"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">Colore</div>
+    <div class="bar"></div>
+    <div class="grid-4">
+      <div class="block"><div class="label">COLORE</div><div class="choices" id="colore_choices"></div></div>
+      <div class="block"><div class="label">RIFLESSO</div><div class="choices" id="riflesso_choices"></div></div>
+      <div class="block"><div class="label">DENSITÀ CROMATICA <small class="subtxt">(vini rossi)</small></div><div class="choices" id="densita_choices"></div></div>
+      <div class="block"><div class="label">LIMPIDEZZA</div><div class="choices" id="limpidezza_choices"></div></div>
+      <div class="block"><div class="label">VIVACITÀ</div><div class="choices" id="vivacita_choices"></div></div>
+      <div class="block"><div class="label">PERLAGE / GRANA BOLLICINE</div><div class="choices" id="perlage_choices"></div></div>
+    </div>
+    <div class="group-title">Menu a tendina rapido</div>
+    <div class="grid-3">
+      <div><select id="sel_colore"></select></div>
+      <div><select id="sel_riflesso"></select></div>
+      <div><select id="sel_densita"></select></div>
+      <div><select id="sel_limpidezza"></select></div>
+      <div><select id="sel_vivacita"></select></div>
+      <div><select id="sel_perlage"></select></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title green">Olfatto</div>
+    <div class="bar green"></div>
+    <div class="row">
+      <div>
+        <div class="label">DESCRITTORI OLFATTIVI</div>
+        <div class="choices" id="olfatto_choices"></div>
+      </div>
+      <div>
+        <div class="label">MENU A TENDINA</div>
+        <select id="sel_olfatto"></select>
+        <p class="note" style="margin-top:8px">La tendina aggiunge o rimuove un descrittore.</p>
+      </div>
+    </div>
+    <div class="group-title green">Note</div>
+    <textarea id="note_olfatto" placeholder="Inserisci qui le note olfattive..."></textarea>
+    <div class="group-title green">Complessità</div>
+    <div class="note">Facile · Complesso · Più che complesso · Ampio</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_complessita"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_complessita" min="12" max="16" step="1" placeholder="12-16"></div>
+    </div>
+    <div class="group-title green">Qualità</div>
+    <div class="note">Accettabile · Fine · Più che fine · Eccellente</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_qualita_olf"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_qualita_olf" min="14" max="20" step="1" placeholder="14-20"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title blue">Gusto</div>
+    <div class="bar blue"></div>
+    <div class="grid-4">
+      <div class="block"><div class="label">ZUCCHERO</div><div class="choices" id="zucchero_choices"></div></div>
+      <div class="block"><div class="label">ALCOL (percepito)</div><div class="choices" id="alcolp_choices"></div></div>
+      <div class="block"><div class="label">ACIDITÀ (percepita)</div><div class="choices" id="acidita_choices"></div></div>
+      <div class="block"><div class="label">TANNINO</div><div class="choices" id="tannino_choices"></div></div>
+    </div>
+    <div class="group-title blue">Equilibrio</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_equilibrio"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_equilibrio" min="12" max="18" step="1" placeholder="12-18"></div>
+    </div>
+    <div class="group-title blue">Persistenza</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_persistenza"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_persistenza" min="10" max="16" step="1" placeholder="10-16"></div>
+    </div>
+    <div class="grid-2">
+      <div class="block"><div class="label">SAPIDITÀ PERCEPITA</div><div class="choices" id="sapidita_choices"></div></div>
+      <div class="block"><div class="label">CHIUSURA DI BOCCA</div><div class="choices" id="chiusura_choices"></div></div>
+    </div>
+    <div class="group-title blue">Qualità gustativa</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_qualita_gust"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_qualita_gust" min="18" max="24" step="1" placeholder="18-24"></div>
+    </div>
+    <div class="group-title blue">Dimensione</div>
+    <div class="grid-2">
+      <div><div class="scale-wrap" id="scala_dimensione"></div></div>
+      <div><div class="label">Punti</div><input type="number" id="val_dimensione" min="3" max="6" step="1" placeholder="3-6"></div>
+    </div>
+    <div class="group-title blue">Prospettive di consumo</div>
+    <div class="choices" id="prospettive_choices"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title navy">Conclusioni</div>
+    <div class="bar navy"></div>
+    <div class="legend">
+      <span>Accettabile · 70/77</span>
+      <span>Buono · 78/85</span>
+      <span>Ottimo · 86/90</span>
+      <span>Eccellente · 91/96</span>
+      <span>Memorabile · 97/100</span>
+    </div>
+    <div class="grid-2" style="margin-top:12px">
+      <div><div class="label">Totale</div><input type="number" id="totale_manual" placeholder="Totale finale"></div>
+      <div><div class="label">Fascia conclusiva</div><input type="text" id="fascia" placeholder="Accettabile / Buono / Ottimo / Eccellente / Memorabile"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="actions">
+      <button class="secondary" id="resetBtn" type="button">Azzera</button>
+      <button id="saveBtn" type="button">Salva</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const singleOptions = {
+  colore:["Paglierino","Dorato","Aranciato","Cerasuolo","Ramato","Porpora","Rubino","Granato"],
+  riflesso:["Non rilevato","Verdolino","Dorato","Aranciato","Porpora","Granato"],
+  densita:["Trasparente","Compatto","Opaco"],
+  limpidezza:["Limpido","Cupo"],
+  vivacita:["Vivace","Luminoso"],
+  perlage:["Grandi","Fini"],
+  zucchero:["Secco","Tendente al dolce","Dolce","Molto dolce"],
+  alcolp:["Contenuto","Caldo","Più che caldo","Molto caldo"],
+  acidita:["Contenuto","Fresco","Più che fresco","Molto fresco"],
+  tannino:["Amaro","Vegetale","Maturo","Raffinato"],
+  sapidita:["Non avvertibile","Contenuto","Sapido","Più che sapido"],
+  chiusura:["Imprecisa","Buona","Precisa","Elegante"],
+  prospettive:["Da bere subito","Brevi prospettive","Medie prospettive","Lunghe prospettive"]
+};
+const multiOptions = {
+  olfatto:["Fruttato","Floreale","Vegetale","Minerale","Erbe aromatiche","Speziato","Tostato","Balsamico","Etereo"]
+};
+
+function makeSingleChoices(key, color){
+  const wrap = document.getElementById(key + '_choices');
+  const name = 'grp_' + key;
+  wrap.innerHTML = singleOptions[key].map((v,i)=> {
+    const id = key + '_' + i;
+    return '<input class="choice-input" type="radio" name="'+name+'" id="'+id+'" value="'+v+'">' +
+           '<label class="choice-label '+color+'" for="'+id+'">'+v+'</label>';
+  }).join('');
+  wrap.addEventListener('change', e=>{
+    if(e.target.matches('input[type="radio"]')){
+      const sel = document.getElementById('sel_' + key);
+      if(sel) sel.value = e.target.value;
+      saveSilent();
+    }
+  });
+}
+
+function makeMultiChoices(key, color){
+  const wrap = document.getElementById(key + '_choices');
+  wrap.innerHTML = multiOptions[key].map((v,i)=> {
+    const id = key + '_' + i;
+    return '<input class="choice-input" type="checkbox" id="'+id+'" value="'+v+'">' +
+           '<label class="choice-label '+color+'" for="'+id+'">'+v+'</label>';
+  }).join('');
+  wrap.addEventListener('change', saveSilent);
+}
+
+function fillSelect(id, values, placeholder){
+  const sel = document.getElementById(id);
+  sel.innerHTML = '<option value="">'+placeholder+'</option>' + values.map(v=>'<option value="'+v+'">'+v+'</option>').join('');
+}
+
+['colore','riflesso','densita','limpidezza','vivacita','perlage'].forEach(k=>makeSingleChoices(k,'orange'));
+['zucchero','alcolp','acidita','tannino','sapidita','chiusura','prospettive'].forEach(k=>makeSingleChoices(k,'blue'));
+makeMultiChoices('olfatto','green');
+
+['colore','riflesso','densita','limpidezza','vivacita','perlage'].forEach(k=>fillSelect('sel_'+k, singleOptions[k], 'Menu ' + k));
+fillSelect('sel_olfatto', multiOptions.olfatto, 'Menu olfatto');
+
+['colore','riflesso','densita','limpidezza','vivacita','perlage'].forEach(key=>{
+  document.getElementById('sel_' + key).addEventListener('change', e=>{
+    const val = e.target.value;
+    document.querySelectorAll('input[name="grp_'+key+'"]').forEach(inp=>{ inp.checked = inp.value === val; });
+    saveSilent();
+  });
+});
+
+document.getElementById('sel_olfatto').addEventListener('change', e=>{
+  const val = e.target.value;
+  if(!val) return;
+  document.querySelectorAll('#olfatto_choices input[type="checkbox"]').forEach(inp=>{
+    if(inp.value === val) inp.checked = !inp.checked;
+  });
+  e.target.value = '';
+  saveSilent();
+});
+
+function makeScale(key, values, colors, inputId){
+  const wrap = document.getElementById(key);
+  wrap.innerHTML = values.map((v,i)=>{
+    const id = key + '_' + i;
+    return '<input class="scale-input" type="radio" name="'+key+'_grp" id="'+id+'" value="'+v+'">' +
+           '<label class="scale-label" style="background:'+colors[i]+'" for="'+id+'">'+v+'</label>';
+  }).join('');
+  wrap.addEventListener('change', e=>{
+    if(e.target.matches('input[type="radio"]')){
+      document.getElementById(inputId).value = e.target.value;
+      autoTotal();
+      saveSilent();
+    }
+  });
+  document.getElementById(inputId).addEventListener('input', ()=>{
+    const v = document.getElementById(inputId).value;
+    document.querySelectorAll('#'+key+' input[type="radio"]').forEach(inp=>{ inp.checked = inp.value === v; });
+    autoTotal();
+    saveSilent();
+  });
+}
+
+makeScale('scala_complessita',[12,13,14,15,16],['#e8efcf','#d8e6ad','#b6cc68','#9ab242','#708b2f'],'val_complessita');
+makeScale('scala_qualita_olf',[14,15,16,17,18,19,20],['#e8efcf','#dfe9be','#c7d977','#bbcf58','#a6bf38','#90aa27','#6d8420'],'val_qualita_olf');
+makeScale('scala_equilibrio',[12,13,14,15,16,17,18],['#e2e8f3','#d1dbef','#b7c7e6','#98afd9','#7893ca','#5472b6','#2f4c8f'],'val_equilibrio');
+makeScale('scala_persistenza',[10,11,12,13,14,15,16],['#e2e8f3','#d6dff0','#bccae9','#9eb2dc','#7f97ce','#5d78bc','#2b3f7f'],'val_persistenza');
+makeScale('scala_qualita_gust',[18,19,20,21,22,23,24],['#e2e8f3','#d8e1f2','#c5d4ee','#acbfe5','#8ea7db','#5d78bc','#23315e'],'val_qualita_gust');
+makeScale('scala_dimensione',[3,3,5,6],['#dfe5f1','#dfe5f1','#4266b3','#1d234a'],'val_dimensione');
+
+function autoTotal(){
+  const ids = ['val_complessita','val_qualita_olf','val_equilibrio','val_persistenza','val_qualita_gust','val_dimensione'];
+  const total = ids.reduce((s,id)=> s + (parseInt(document.getElementById(id).value || '0',10) || 0), 0);
+  document.getElementById('totale_manual').value = total || '';
+  let fascia = '';
+  if(total >= 70 && total <= 77) fascia = 'Accettabile';
+  else if(total >= 78 && total <= 85) fascia = 'Buono';
+  else if(total >= 86 && total <= 90) fascia = 'Ottimo';
+  else if(total >= 91 && total <= 96) fascia = 'Eccellente';
+  else if(total >= 97 && total <= 100) fascia = 'Memorabile';
+  document.getElementById('fascia').value = fascia;
+}
+
+function collect(){
+  const data = {
+    luogo: document.getElementById('luogo').value,
+    data: document.getElementById('data').value,
+    vino: document.getElementById('vino').value,
+    alcol: document.getElementById('alcol').value,
+    note_olfatto: document.getElementById('note_olfatto').value,
+    totale_manual: document.getElementById('totale_manual').value,
+    fascia: document.getElementById('fascia').value,
+    val_complessita: document.getElementById('val_complessita').value,
+    val_qualita_olf: document.getElementById('val_qualita_olf').value,
+    val_equilibrio: document.getElementById('val_equilibrio').value,
+    val_persistenza: document.getElementById('val_persistenza').value,
+    val_qualita_gust: document.getElementById('val_qualita_gust').value,
+    val_dimensione: document.getElementById('val_dimensione').value
+  };
+  Object.keys(singleOptions).forEach(key=>{
+    const checked = document.querySelector('input[name="grp_'+key+'"]:checked');
+    data[key] = checked ? checked.value : '';
+  });
+  data.olfatto = Array.from(document.querySelectorAll('#olfatto_choices input[type="checkbox"]:checked')).map(x=>x.value);
+  return data;
+}
+
+function restore(data){
+  if(!data) return;
+  ['luogo','data','vino','alcol','note_olfatto','totale_manual','fascia','val_complessita','val_qualita_olf','val_equilibrio','val_persistenza','val_qualita_gust','val_dimensione'].forEach(id=>{
+    if(data[id] != null) document.getElementById(id).value = data[id];
+  });
+  Object.keys(singleOptions).forEach(key=>{
+    if(data[key]){
+      document.querySelectorAll('input[name="grp_'+key+'"]').forEach(inp=>{ inp.checked = inp.value === data[key]; });
+      const sel = document.getElementById('sel_' + key);
+      if(sel) sel.value = data[key];
+    }
+  });
+  if(Array.isArray(data.olfatto)){
+    document.querySelectorAll('#olfatto_choices input[type="checkbox"]').forEach(inp=>{ inp.checked = data.olfatto.includes(inp.value); });
+  }
+  [['scala_complessita','val_complessita'],['scala_qualita_olf','val_qualita_olf'],['scala_equilibrio','val_equilibrio'],['scala_persistenza','val_persistenza'],['scala_qualita_gust','val_qualita_gust'],['scala_dimensione','val_dimensione']].forEach(pair=>{
+    const radios = document.querySelectorAll('#'+pair[0]+' input[type="radio"]');
+    const val = document.getElementById(pair[1]).value;
+    radios.forEach(inp=>{ inp.checked = inp.value === val; });
+  });
+}
+
+function saveSilent(){ localStorage.setItem('scheda_assosommelier_ios_fix', JSON.stringify(collect())); }
+
+document.querySelectorAll('input, textarea, select').forEach(el=>{
+  el.addEventListener('input', saveSilent);
+  el.addEventListener('change', saveSilent);
+});
+
+document.getElementById('saveBtn').addEventListener('click', ()=>{ autoTotal(); saveSilent(); alert('Scheda salvata sul dispositivo.'); });
+document.getElementById('resetBtn').addEventListener('click', ()=>{ if(confirm('Vuoi azzerare la scheda?')){ localStorage.removeItem('scheda_assosommelier_ios_fix'); location.reload(); }});
+
+restore(JSON.parse(localStorage.getItem('scheda_assosommelier_ios_fix') || 'null'));
+autoTotal();
+</script>
+</body>
+</html>
